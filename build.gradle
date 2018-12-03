@@ -18,24 +18,42 @@ sourceSets {
   }
 }
 
+compileJava {
+  options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+}
+
 repositories {
-   flatDir {
-       dirs 'libs'
-   }
+  flatDir {
+      dirs 'libs'
+  }
+  mavenCentral()
 }
 
 dependencies {
     compile name: 'ysoserial-0.0.6-SNAPSHOT'
+    compile 'commons-cli:commons-cli:1.4'
 }
 
-jar {
+// jar {
+//     manifest {
+//         attributes 'Implementation-Title': 'Deserial',
+//                    'Implementation-Version': version,
+//                    'Main-Class': 'com.softwaresecured.Deserial'
+//     }
+
+//     from {
+//         configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+//     }
+// }
+
+task fatJar(type: Jar) {
     manifest {
         attributes 'Implementation-Title': 'Deserial',
                    'Implementation-Version': version,
                    'Main-Class': 'com.softwaresecured.Deserial'
     }
-
-    from {
-        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-    }
+    baseName = 'deserial'
+    classifier = 'all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }

@@ -11,10 +11,10 @@ Gradle creates a fat jar which can be used directly
 
 ## Build
 
-    gradle clean build
+    gradle clean fatJar
 
 ## Run
 
-    java -jar .\build\libs\deserial-1.0.jar
+    java -jar .\build\libs\deserial-1.0-all.jar -help
 
-    java -jar .\build\libs\deserial-1.0.jar CommonsBeanutils1 calc.exe
+    java -jar .\build\libs\deserial-1.0-all.jar -command calc.exe -payload CommonsBeanutils1 -output base64
