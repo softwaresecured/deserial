@@ -1,8 +1,6 @@
-# README
+# README - Deserial
 
-This tool will output a hex, base64 encoded and a base64 encoded compress payload
-
-The command is hardcoded in the Deserial.java file. To update, you will need to recompile.
+This tool will output a hex, a base64 encoded and a base64 encoded compressed payload.
 
 Gradle creates a fat jar which can be used directly
 
@@ -18,3 +16,5 @@ Gradle creates a fat jar which can be used directly
 ## Run
 
     java -jar .\build\libs\deserial-1.0.jar
+
+    java -jar .\build\libs\deserial-1.0.jar CommonsBeanutils1 calc.exe
